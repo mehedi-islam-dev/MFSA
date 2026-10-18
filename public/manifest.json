@@ -1,0 +1,17 @@
+{
+  "name": "Marine Analytica",
+  "short_name": "Analytica",
+  "description": "Autonomous marine AI ecosystem for fish stock assessment",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#06b6d4",
+  "background_color": "#030712",
+  "icons": [
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

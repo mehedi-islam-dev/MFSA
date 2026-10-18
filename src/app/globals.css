@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Abyssal Futurism Color Palette */
+  --color-abyssal-base: #010409;
+  --color-abyssal-surface: #050b14;
+  --color-neon-cyan: #00f0ff;
+  --color-neon-purple: #a855f7;
+  --color-neon-red: #ff003c;
+  --color-neon-green: #00ff66;
+  
+  /* Glassmorphism Variables */
+  --color-glass-bg: rgba(10, 20, 35, 0.65);
+  --color-glass-border: rgba(0, 240, 255, 0.25);
+  
+  /* Custom Animations */
+  --animate-float: float 4s ease-in-out infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--color-abyssal-base);
+    --foreground: var(--color-neon-cyan);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    /* Prevent pull-to-refresh on mobile PWAs */
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Core Glassmorphic Component */
+  .glass-panel {
+    background-color: var(--color-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-panel:hover {
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 240, 255, 0.1);
+  }
+
+  /* Neon Text Typography Effects */
+  .neon-text {
+    color: var(--color-neon-cyan);
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.6), 0 0 15px rgba(0, 240, 255, 0.3);
+  }
+
+  .neon-text-red {
+    color: var(--color-neon-red);
+    text-shadow: 0 0 5px rgba(255, 0, 60, 0.6), 0 0 15px rgba(255, 0, 60, 0.3);
+  }
+
+  .neon-text-purple {
+    color: var(--color-neon-purple);
+    text-shadow: 0 0 5px rgba(168, 85, 247, 0.6), 0 0 15px rgba(168, 85, 247, 0.3);
+  }
+}
+
+/* ==========================================
+   SCROLLBAR OVERRIDE: SCI-FI TERMINAL 
+   ========================================== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #01060c;
+  border-left: 1px solid rgba(0, 240, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+}
+
+/* Specific class for ultra-thin internal component scrolling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
 }
