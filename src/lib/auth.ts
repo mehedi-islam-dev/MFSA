@@ -15,15 +15,7 @@ const pool = connectionString
     }) 
   : null;
 
-// Diagnostic check to see if the raw connection works before BetterAuth initializes
 if (pool) {
-  pool.connect()
-    .then(client => {
-      console.log("✅ SUCCESS: Raw Postgres connection established.");
-      client.release();
-    })
-    .catch(err => console.error("❌ FATAL: Raw Postgres connection failed:", err.message));
-
   // ── Critical: suppress unhandled pool connection errors ───────────────────────
   // Without this handler, any failed TCP connection attempt emits an unhandled 'error' event
   pool.on("error", (err) => {
